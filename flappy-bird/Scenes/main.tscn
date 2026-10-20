@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://bwmiq5fxsjnjw"]
+
+[ext_resource type="Script" uid="uid://ba00fyxmow4lc" path="res://Scenes/main.gd" id="1_8gbba"]
+[ext_resource type="PackedScene" uid="uid://duly2oitviys3" path="res://Scenes/bullet.tscn" id="2_21xkr"]
+[ext_resource type="Texture2D" uid="uid://lejciteh4xgw" path="res://Sprites/Flappy Bird Sprites/bg.png" id="2_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://b1kgy2ulgpcyq" path="res://Scenes/pipe.tscn" id="2_kry3j"]
+[ext_resource type="PackedScene" uid="uid://djecfjb5wt7sf" path="res://Scenes/bird.tscn" id="3_kry3j"]
+[ext_resource type="PackedScene" uid="uid://e02eqm7croop" path="res://Scenes/ground.tscn" id="4_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://bsh6a3db6p142" path="res://Scenes/game_over.tscn" id="6_21xkr"]
+
+[node name="Main" type="Node" unique_id=748254787]
+script = ExtResource("1_8gbba")
+pipe_scene = ExtResource("2_kry3j")
+bullet_scene = ExtResource("2_21xkr")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1781985042]
+position = Vector2(432, 385)
+texture = ExtResource("2_jjvhh")
+
+[node name="Bird" parent="." unique_id=1257380558 instance=ExtResource("3_kry3j")]
+
+[node name="Ground" parent="." unique_id=63065734 instance=ExtResource("4_jjvhh")]
+position = Vector2(397, 1)
+
+[node name="PipeTimer" type="Timer" parent="." unique_id=1370410415]
+wait_time = 1.5
+
+[node name="ScoreLabel" type="Label" parent="." unique_id=1213224014]
+z_index = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -34.5
+offset_right = 34.5
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 40
+text = "SCORE: 0"
+
+[node name="GameOver" parent="." unique_id=2003328716 instance=ExtResource("6_21xkr")]
+
+[connection signal="hit" from="Ground" to="." method="_on_ground_hit"]
+[connection signal="timeout" from="PipeTimer" to="." method="_on_pipe_timer_timeout"]
+[connection signal="restart" from="GameOver" to="." method="_on_game_over_restart"]

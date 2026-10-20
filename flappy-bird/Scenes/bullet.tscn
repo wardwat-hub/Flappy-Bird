@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://duly2oitviys3"]
+
+[ext_resource type="Script" uid="uid://03vsrnr8cpfx" path="res://Scenes/bullet.gd" id="1_oduel"]
+[ext_resource type="Texture2D" uid="uid://vkdexs7fx24p" path="res://Sprites/Flappy Bird Sprites/bullet.png" id="2_ycag2"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4mw4s"]
+height = 38.0
+
+[node name="Bullet" type="Area2D" unique_id=1829231345 groups=["bullets"]]
+script = ExtResource("1_oduel")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1655909484]
+texture = ExtResource("2_ycag2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1493085668]
+position = Vector2(-4, 0)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_4mw4s")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
